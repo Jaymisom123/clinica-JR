@@ -36,11 +36,7 @@
         box-sizing: border-box;
     }
     .loading {
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    .loaded {
-        opacity: 1;
+        visibility: visible;
     }
     </style>
     
@@ -51,7 +47,7 @@
     <link rel="stylesheet" href="./src/css/style.css">
 </head>
 
-<body class="loading">
+<body>
     <!-- Header -->
     <header class="header" id="header">
         <nav class="nav">
@@ -631,20 +627,6 @@
 
     <script src="./src/js/main.js"></script>
     
-    <!-- Remove loading class when page is loaded -->
-    <script>
-    window.addEventListener('load', function() {
-        document.body.classList.remove('loading');
-        document.body.classList.add('loaded');
-    });
-    
-    // Fallback for slower connections
-    document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-            document.body.classList.remove('loading');
-            document.body.classList.add('loaded');
-        }, 100);
-    });
-    </script>
+
 </body>
 </html>
