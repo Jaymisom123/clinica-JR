@@ -1,31 +1,42 @@
 /*==================== SHOW MENU ====================*/
 const navMenu = document.getElementById('nav-menu'),
       navToggle = document.getElementById('nav-toggle'),
-      navClose = document.getElementById('nav-close')
+      navClose = document.getElementById('nav-close'),
+      navOverlay = document.getElementById('nav-overlay')
 
 /*===== MENU SHOW =====*/
 /* Validate if constant exists */
 if(navToggle){
     navToggle.addEventListener('click', () =>{
         navMenu.classList.add('show-menu')
+        if(navOverlay) navOverlay.classList.add('show-overlay')
+        document.body.style.overflow = 'hidden'
     })
 }
 
 /*===== MENU HIDDEN =====*/
+function closeMenu() {
+    navMenu.classList.remove('show-menu')
+    if(navOverlay) navOverlay.classList.remove('show-overlay')
+    document.body.style.overflow = 'auto'
+}
+
 /* Validate if constant exists */
 if(navClose){
-    navClose.addEventListener('click', () =>{
-        navMenu.classList.remove('show-menu')
-    })
+    navClose.addEventListener('click', closeMenu)
+}
+
+/*===== CLOSE MENU ON OVERLAY CLICK =====*/
+if(navOverlay){
+    navOverlay.addEventListener('click', closeMenu)
 }
 
 /*==================== REMOVE MENU MOBILE ====================*/
 const navLink = document.querySelectorAll('.nav__link')
 
 function linkAction(){
-    const navMenu = document.getElementById('nav-menu')
-    // When we click on each nav__link, we remove the show-menu class
-    navMenu.classList.remove('show-menu')
+    // When we click on each nav__link, we close the menu
+    closeMenu()
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
 

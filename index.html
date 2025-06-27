@@ -3,14 +3,55 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
     <title>Clínica JR - Cuidando da sua saúde com excelência</title>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: #ffffff;
+        color: #545454;
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        z-index: 100;
+        box-shadow: 0 2px 12px rgba(84, 84, 84, 0.1);
+    }
+    .hero {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ede7d5 100%);
+        padding-top: 70px;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    .loading {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .loaded {
+        opacity: 1;
+    }
+    </style>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./src/css/style.css">
 </head>
 
-<body>
+<body class="loading">
     <!-- Header -->
     <header class="header" id="header">
         <nav class="nav">
@@ -45,12 +86,12 @@
                 </div>
                 
                 <div class="nav__actions">
-                    <a href="#contact" class="btn btn--primary">Agendar Consulta</a>
                     <div class="nav__toggle" id="nav-toggle">
                         <i class="fas fa-bars"></i>
                     </div>
                 </div>
             </div>
+            <div class="nav__overlay" id="nav-overlay"></div>
             </nav>
     </header>
 
@@ -589,5 +630,21 @@
     </button>
 
     <script src="./src/js/main.js"></script>
+    
+    <!-- Remove loading class when page is loaded -->
+    <script>
+    window.addEventListener('load', function() {
+        document.body.classList.remove('loading');
+        document.body.classList.add('loaded');
+    });
+    
+    // Fallback for slower connections
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            document.body.classList.remove('loading');
+            document.body.classList.add('loaded');
+        }, 100);
+    });
+    </script>
 </body>
 </html>
